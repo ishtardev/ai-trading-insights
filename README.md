@@ -4,10 +4,10 @@ Get real-time stock analysis with AI-powered trading insights. Free, fast, and s
 
 ## Course Project
 
-**Module:** Deep Learning et intelligence Artificielle Générative
-**Students:** Fatima Ezzahraa Abbari, Mariem Tahramt  
-**Professor:** OUTMAN Haddani  
-**Masters Program:** Finance, Actuariat et Data Science
+- **Module:** Deep Learning et intelligence Artificielle Générative 
+- **Students:** Fatima Ezzahraa Abbari, Mariem Tahramt  
+- **Professor:** OUTMAN Haddani  
+- **Masters Program:** Finance, Actuariat et Data Science
 
 
 ---
