@@ -1,112 +1,112 @@
-# AI Trading Insights
+# Aperçus du Trading IA
 
-Get real-time stock analysis with AI-powered trading insights. Free, fast, and simple.
+Obtenez une analyse boursière en temps réel avec des aperçus de trading alimentés par l'IA. Gratuit, rapide et simple.
 
-## Course Project
+## Projet : 
 
-- **Module:** Deep Learning et intelligence Artificielle Générative 
-- **Students:** Fatima Ezzahraa Abbari, Mariem Tahramt  
-- **Professor:** OUTMAN Haddani  
-- **Masters Program:** Finance, Actuariat et Data Science
+**Module:** Deep Learning et Intelligence Artificielle Générative
+**Étudiants:** Fatima Ezzahraa Abbari, Mariem Tahramt  
+**Professeur:** OUTMAN Haddani  
+**Programme de Master:** Finance, Actuariat et Data Science
 
 
 ---
 
-## What It Does
+## Objectif
 
-Fetches stock prices and automatically generates trading insights:
+Récupère les prix des actions et génère automatiquement des aperçus de trading :
 
 ```
-GOOGL: Close $319.95, Change -1.08%
-→ UPTREND (10d MA above 30d MA) | Watch for pullback
+GOOGL: Clôture $319,95, Changement -1,08%
+→ TENDANCE HAUSSIÈRE (MA 10j au-dessus de MA 30j) | Attention au recul
 
-TSLA: Close $426.58, Change +1.71%
-→ DOWNTREND (10d MA below 30d MA) | Possible reversal forming
+TSLA: Clôture $426,58, Changement +1,71%
+→ TENDANCE BAISSIÈRE (MA 10j en-dessous de MA 30j) | Inversion possible en cours
 ```
 
-## How It Works
+## Comment cela fonctionne
 
-1. **Get Stock Data** → Fetches 30 days of price history from Polygon.io (now Massive)
-2. **Calculate Indicators** → Computes 10-day and 30-day moving averages
-3. **Generate Insight** → Analyzes trend and creates trading recommendation
-4. **Optional Storage** → Saves results to S3 for tracking (optional)
+1. **Obtenir les données boursières** → Récupère 30 jours d'historique des prix de Polygon.io (désormais Massive)
+2. **Calculer les indicateurs** → Calcule les moyennes mobiles de 10 et 30 jours
+3. **Générer l'aperçu** → Analyse la tendance et crée une recommandation de trading
+4. **Stockage optionnel** → Enregistre les résultats sur S3 pour le suivi (optionnel)
 
-## Setup (5 minutes)
+## Configuration 
 
-### 1. Get API Keys
+### 1. Obtenir les clés API
 
-**Polygon.io / Massive** (stock prices)
-- Go to: https://polygon.io/
-- Sign up (free tier)
-- Copy your API key
-- Note: Polygon is transitioning to Massive platform
+**Polygon.io / Massive** (prix des actions)
+- Allez à : https://polygon.io/
+- S'inscrire (niveau gratuit)
+- Copier votre clé API
+- Remarque : Polygon fait la transition vers la plateforme Massive
 
-**Hugging Face** (optional AI enhancement)
-- Go to: https://huggingface.co/
-- Sign up → Settings → Tokens → Create new token
-- Choose "Read" permission
-- Copy token
+**Hugging Face** (amélioration IA optionnelle)
+- Allez à : https://huggingface.co/
+- S'inscrire → Paramètres → Jetons → Créer un nouveau jeton
+- Choisir la permission "Lire"
+- Copier le jeton
 
-### 2. Install & Configure
+### 2. Installer et configurer
 
 ```bash
-# Install packages
+# Installer les packages
 pip install -r requirements.txt
 
-# Create .env file from template
+# Créer le fichier .env à partir du modèle
 cp .env.example .env
 
-# Edit .env and paste your keys:
+# Éditer .env et coller vos clés :
 # POLYGON_API_KEY=your_key_here
 # HF_API_TOKEN=your_token_here
 ```
 
-### 3. Run It
+### 3. Exécuter
 
 ```bash
-# Single stock
+# Action unique
 python stock_analyzer.py AAPL
 
-# Multiple stocks (13-second delays between requests)
+# Plusieurs actions (délai de 13 secondes entre les requêtes)
 python stock_analyzer.py GOOGL TSLA MSFT
 
-# Save to S3 (if configured)
+# Enregistrer sur S3 (si configuré)
 python stock_analyzer.py AAPL --save-s3
 ```
 
-**Output:**
+**Résultat:**
 ```
 ============================================================
-Analyzing: GOOGL
+Analyse : GOOGL
 ============================================================
 
-Stock Data:
-  Latest Close: $319.95
-  Daily Change: -1.08%
-  SMA(10d):     $296.82
-  SMA(30d):     $289.65
-  Avg Volume (10d): 59,250,020
+Données boursières:
+  Dernière clôture: $319,95
+  Changement quotidien: -1,08%
+  SMA(10j):     $296,82
+  SMA(30j):     $289,65
+  Volume moyen (10j): 59 250 020
 
-AI Insight:
-  GOOGL is in UPTREND (10d MA above 30d MA) | Watch for pullback
+Aperçu IA:
+  GOOGL est en TENDANCE HAUSSIÈRE (MA 10j au-dessus de MA 30j) | Attention au recul
 
 ============================================================
 ```
 
-## How It Works
+## Comment cela fonctionne
 
-1. **Stock Data** → Polygon.io API fetches last 30 days of daily aggregates
-2. **Indicators** → Script computes SMA-10, SMA-30, daily % change, average volume
-3. **Prompt** → Data is formatted into a concise text prompt
-4. **AI Analysis** → Prompt sent to Hugging Face Inference API (flan-t5-small model)
-5. **Insight** → Model generates a plain-English trading recommendation
-6. **Optional S3 Storage** → Results persisted to S3-compatible bucket (Massive) for historical tracking
+1. **Données boursières** → L'API Polygon.io récupère les 30 derniers jours d'agrégats quotidiens
+2. **Indicateurs** → Le script calcule SMA-10, SMA-30, changement quotidien %, volume moyen
+3. **Invite** → Les données sont formatées dans une invite textuelle concise
+4. **Analyse IA** → Invite envoyée à l'API Hugging Face Inference (modèle flan-t5-small)
+5. **Aperçu** → Le modèle génère une recommandation de trading claire
+6. **Stockage S3 optionnel** → Les résultats sont persistés dans un bucket compatible S3 (Massive) pour le suivi historique
 
-## S3 Integration (Optional)
+## Intégration S3 (Optionnel)
 
-To save analysis results to S3 for historical tracking:
+Pour enregistrer les résultats d'analyse sur S3 pour le suivi historique :
 
-1. Add S3 credentials to `.env`:
+1. Ajoutez les identifiants S3 à `.env`:
    ```
    S3_ACCESS_KEY=your_access_key
    S3_SECRET_KEY=your_secret_key
@@ -114,101 +114,101 @@ To save analysis results to S3 for historical tracking:
    S3_BUCKET=your_bucket_name
    ```
 
-2. Run with `--save-s3` flag:
+2. Exécutez avec l'indicateur `--save-s3`:
    ```bash
    python stock_analyzer.py AAPL --save-s3
    ```
 
-3. Results are stored at: `s3://bucket/analyses/TICKER/YYYY-MM-DDTHH-MM-SS.json`
+3. Les résultats sont stockés à : `s3://bucket/analyses/TICKER/YYYY-MM-DDTHH-MM-SS.json`
 
-## Files
+## Fichiers
 
-- `stock_analyzer.py` — Main analysis script
-- `requirements.txt` — Python dependencies
-- `.env.example` — API key template
-- `.env` — Your actual API keys (create this, don't commit)
+- `stock_analyzer.py` — Script d'analyse principal
+- `requirements.txt` — Dépendances Python
+- `.env.example` — Modèle de clé API
+- `.env` — Vos clés API réelles (créez ceci, ne commitez pas)
 
-## Free Tier Limitations & Rate Limits
+## Limitations du niveau gratuit et limites de débit
 
-| Service | Rate Limit | How Script Handles It |
+| Service | Limite de débit | Comment le script le gère |
 |---------|-----------|-------|
-| Polygon.io (Massive) | 5 calls/min | Waits 13 seconds between requests |
-| Hugging Face | ~1 req/sec | Optional; falls back to technical analysis if unavailable |
+| Polygon.io (Massive) | 5 appels/min | Attend 13 secondes entre les requêtes |
+| Hugging Face | ~1 req/sec | Optionnel ; bascule vers l'analyse technique si indisponible |
 
-## What are Polygon.io / Massive and Hugging Face?
+## Que sont Polygon.io / Massive et Hugging Face ?
 
 **Polygon.io / Massive**
-- Financial data API for stocks, crypto, currencies
-- Free tier: real-time & historical prices
-- 5 API calls/min (script auto-waits 13 seconds between tickers)
-- Transitioning from Polygon.io to Massive platform
+- API de données financières pour actions, crypto, devises
+- Niveau gratuit : prix en temps réel et historiques
+- 5 appels API/min (le script attend automatiquement 13 secondes entre les tickers)
+- Transition de Polygon.io vers la plateforme Massive
 
 **Hugging Face**
-- Free AI model hosting & inference API
-- Provides free API calls for learning/testing
-- Script tries it for smarter insights, falls back to technical analysis if unavailable
-- No GPU needed—runs on their servers
+- Hébergement gratuit de modèles IA et API d'inférence
+- Fournit des appels API gratuits pour l'apprentissage/test
+- Le script l'essaie pour des aperçus plus intelligents, bascule vers l'analyse technique si indisponible
+- Aucun GPU nécessaire—s'exécute sur leurs serveurs
 
-## Understanding the Insights
+## Comprendre les aperçus
 
 ```
-GOOGL is in UPTREND (10d MA above 30d MA) | Watch for pullback
+GOOGL est en TENDANCE HAUSSIÈRE (MA 10j au-dessus de MA 30j) | Attention au recul
 ↑                                          ↑
-Trend Signal                              Price Action
+Signal de tendance                         Action des prix
 
-TSLA is in DOWNTREND (10d MA below 30d MA) | Possible reversal forming
+TSLA est en TENDANCE BAISSIÈRE (MA 10j en-dessous de MA 30j) | Inversion possible en cours
 ↑                                           ↑
-Downtrend                                  Recovery Signal
+Tendance baissière                         Signal de récupération
 ```
 
-## Tested & Working
+## Testé et fonctionnel
 
-✅ Real stock data from Polygon.io
-✅ Rate limiting (13-second delays)
-✅ Technical analysis insights (moving averages, trend detection)
-✅ Multiple stocks in one run
-✅ Optional S3 storage (Massive bucket)
+ Données boursières réelles de Polygon.io
+ Limitation de débit (délai de 13 secondes)
+ Aperçus d'analyse technique (moyennes mobiles, détection de tendance)
+ Plusieurs actions en une seule exécution
+ Stockage S3 optionnel (bucket Massive)
 
-## Next Steps
+## Prochaines étapes
 
-- Run with your stocks: `python stock_analyzer.py MSFT AMZN NVDA`
-- Check insights daily for trading signals
-- Set up S3 storage to track historical trends
-- Extend with more indicators (RSI, MACD, Bollinger Bands) if needed
+- Exécutez avec vos actions: `python stock_analyzer.py MSFT AMZN NVDA`
+- Vérifiez les aperçus quotidiennement pour les signaux de trading
+- Configurez le stockage S3 pour suivre les tendances historiques
+- Étendez avec d'autres indicateurs (RSI, MACD, Bandes de Bollinger) si nécessaire
 
-## Course Learning Outcomes
+## Résultats d'apprentissage du cours
 
-This project demonstrates:
+Ce projet démontre :
 
-- **API Integration** → Connecting to multiple free APIs (Polygon.io, Hugging Face)
-- **Data Processing** → Fetching, parsing, and analyzing financial data
-- **AI Implementation** → Using Hugging Face models for AI insights
-- **Cloud Storage** → S3/Massive for data persistence
-- **Rate Limiting & Error Handling** → Managing API constraints gracefully
-- **Python Best Practices** → Clean code, modular design, environment variables
+- **Intégration API** → Connexion à plusieurs API gratuites (Polygon.io, Hugging Face)
+- **Traitement des données** → Récupération, analyse et analyse des données financières
+- **Implémentation IA** → Utilisation des modèles Hugging Face pour les aperçus IA
+- **Stockage en cloud** → S3/Massive pour la persistance des données
+- **Limitation de débit et gestion d'erreurs** → Gestion gracieuse des contraintes API
+- **Meilleures pratiques Python** → Code propre, conception modulaire, variables d'environnement
 
-## Project Structure
+## Structure du projet
 
 ```
 ai-trading-insights/
-├── stock_analyzer.py      # Main script (270+ lines)
-├── requirements.txt       # Dependencies (requests, boto3, python-dotenv)
-├── .env.example          # API key template
-├── .env                  # Your actual keys (not committed)
-└── README.md             # This file
+├── stock_analyzer.py      # Script principal (270+ lignes)
+├── requirements.txt       # Dépendances (requests, boto3, python-dotenv)
+├── .env.example          # Modèle de clé API
+├── .env                  # Vos clés réelles (non commises)
+└── README.md             # Ce fichier
 ```
 
-## Key Technologies
+## Technologies clés
 
-| Technology | Purpose | Why Used |
-|-----------|---------|----------|
-| Python | Core language | Simplicity, data processing |
-| Polygon.io/Massive | Stock data API | Free, reliable, real-time |
-| Hugging Face | AI insights | Free inference, no GPU needed |
-| boto3 | S3 storage | Data persistence, cloud integration |
-| python-dotenv | Config management | Secure API key handling |
+| Technologie | Objectif | Pourquoi utilisé |
+|-----------|---------|-------------|
+| Python | Langage principal | Simplicité, traitement des données |
+| Polygon.io/Massive | API de données boursières | Gratuit, fiable, en temps réel |
+| Hugging Face | Aperçus IA | Inférence gratuite, aucun GPU nécessaire |
+| boto3 | Stockage S3 | Persistance des données, intégration cloud |
+| python-dotenv | Gestion de la configuration | Gestion sécurisée des clés API |
 
-## License
+## Licence
 
-free for personal use 
+Gratuit pour un usage personnel 
 
